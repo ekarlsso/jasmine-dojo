@@ -1,7 +1,8 @@
-MessageApp.Controllers.Messages = (function() {
+var MessagesController = function(ajaxApiObj) {
 
     var model = null;
     var self = this;
+    var ajaxAPI = ajaxApiObj;
 
     function init(m) {
         model = m;
@@ -11,13 +12,14 @@ MessageApp.Controllers.Messages = (function() {
         }
 
         refreshMessages();
+        listenForNewMessages();
     }
 
     function listenForNewMessages() {
 
         var self = this;
 
-        MessageApp.Tools.MessagesAjaxAPI.getAJAX(
+        ajaxAPI.getAJAX(
             'api/newmessages',
             '',
             function (data, textStatus, jqXHR) {
@@ -28,22 +30,20 @@ MessageApp.Controllers.Messages = (function() {
 
     function refreshMessages() {
 
-        MessageApp.Tools.MessagesAjaxAPI.getAJAX(
+        ajaxAPI.getAJAX(
             'api/messages',
             '',
             function(data, textStatus, jqXHR) {
                 model.update(data);
             },
             function (jqXHR, textStatus, errorThrown) {});
-
-         listenForNewMessages();
     }
 
     function newMessage(user, msg) {
 
         var dataStr = "{\"user\": \""+user+"\", \"message\": \""+msg+"\"}";
 
-        MessageApp.Tools.MessagesAjaxAPI.postAJAX(
+        ajaxAPI.postAJAX(
             'api/messages',
             dataStr,
             function (data, textStatus, jqXHR) {},
@@ -61,8 +61,7 @@ MessageApp.Controllers.Messages = (function() {
 
     return {
         init: init,
-        newMessage: newMessage,
-        refreshMessages: refreshMessages
+        newMessage: newMessage
     }
 
-})();
+};

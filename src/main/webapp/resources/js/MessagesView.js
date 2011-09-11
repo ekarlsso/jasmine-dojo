@@ -1,7 +1,7 @@
 /**
  * View updating the message view
  */
-MessageApp.Views.Messages = (function(){
+var MessagesView = function(){
 
     var messageElement = null;
     var model = null;
@@ -30,11 +30,10 @@ MessageApp.Views.Messages = (function(){
         messageElement = $('#chatMessages');
         model = mdl;
         model.addListener(this);
-
     }
 
     return {
         init: init,
         refresh: refresh,
     };
-})();
+};

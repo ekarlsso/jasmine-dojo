@@ -1,4 +1,4 @@
-MessageApp.Models.Messages = (function() {
+var MessagesModel = function() {
 
     var messages = [];
     var listeners = [];
@@ -32,4 +32,4 @@ MessageApp.Models.Messages = (function() {
         getMessages: getMessages
     }
 
-})();
+};

@@ -1,4 +1,4 @@
-MessageApp.Tools.MessagesAjaxAPI = (function() {
+var MessagesAjaxAPI = function() {
 
     function ajaxMethod(method, url, data, succFun, errorFun) {
 
@@ -27,4 +27,4 @@ MessageApp.Tools.MessagesAjaxAPI = (function() {
         getAJAX:getAJAX
     }
 
-})();
+};
